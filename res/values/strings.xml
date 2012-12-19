@@ -1,11 +1,9 @@
 <resources>
 
-    <string name="app_name">HelloWorld</string>
-    <string name="hello_world">Hello world! --Developed by Manas Paldhe</string>
+    <string name="app_name">Calculator</string>
+    <string name="hello_world">Calculator - Developed by Manas Paldhe and Anurag Jain</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="edit_message">Message Here</string>
-    <string name="button_send">Send</string>
-    <string name="title_activity_display_message">DisplayMessageActivity</string>
+    <string name="title_activity_main">Calculator</string>
+    <string name="edit_message">Expression Here!</string>
 
 </resources>
