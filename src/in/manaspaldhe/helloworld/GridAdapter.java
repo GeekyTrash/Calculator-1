@@ -2,6 +2,7 @@ package in.manaspaldhe.helloworld;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -49,12 +50,12 @@ public class GridAdapter extends BaseAdapter{
 					a.performButtonClick(pos);
 				} 
 			}); 
-			btn.setPadding(1, 1, 1, 1);
 		} 
 		else 
 		{           
 			btn = (Button) convertView;       
 		}       
+		btn.setGravity(Gravity.CENTER);
 		btn.setText(MainActivity.button_text[position]);  
 		btn.setBackgroundResource(R.drawable.button);
 		btn.setTextColor(Color.LTGRAY);

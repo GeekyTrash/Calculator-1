@@ -3,4 +3,13 @@
         android:title="@string/menu_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/frac_dec"
+        android:title="F/D"
+        android:orderInCategory="100"
+        android:showAsAction="always" />
+    <item android:id="@+id/deg_rad"
+        android:title="R/D"
+        android:orderInCategory="100"
+        android:showAsAction="always" />
+    
 </menu>
