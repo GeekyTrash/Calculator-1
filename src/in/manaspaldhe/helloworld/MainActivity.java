@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 		"1",	"2",	"3",	"*",
 		"0",	".",	"-",	"+",
 		"(",	")",	"CE",	"=",
-		"^",		"tanlog(",		"log(",		"%",
+		"^",		"ln(",		"log(",		"%",
 		"sin(",		"cos(",		"tan(",		"^0.5",
 		"arcsin(",	"arccos(",	"arctan(",	"test",		
 	};

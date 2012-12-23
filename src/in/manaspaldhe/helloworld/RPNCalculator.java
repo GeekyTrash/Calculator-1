@@ -1,6 +1,6 @@
 package in.manaspaldhe.helloworld;
 import java.io.IOException;
-import java.math.*;
+import java.text.DecimalFormat;
 /**
  *
  * @author mpaldhe
@@ -46,12 +46,19 @@ public class RPNCalculator {
     
     public  int Precedence (String op){
         if (op.equals("log")){return 5;}
+        if (op.equals("ln")){return 5;}
         if (op.equals("sin")){return 5;}
         if (op.equals("cos")){return 5;}
         if (op.equals("tan")){return 5;}
         if (op.equals("arcsin")){return 5;}
         if (op.equals("arccos")){return 5;}
         if (op.equals("arctan")){return 5;}
+        if (op.equals("sind")){return 5;}
+        if (op.equals("cosd")){return 5;}
+        if (op.equals("tand")){return 5;}
+        if (op.equals("arcsind")){return 5;}
+        if (op.equals("arccosd")){return 5;}
+        if (op.equals("arctand")){return 5;}
         if (op.equals("^")){return 4;}
         if (op.equals("*")){return 3;}
         if (op.equals("/")){return 3;}
@@ -110,7 +117,28 @@ public class RPNCalculator {
         if (Operator.equals("arccos")){
             return Math.acos( top1);
         }
+        if (Operator.equals("sind")){
+            return Math.sin(top1*Math.PI/180);
+        }
+        if (Operator.equals("cosd")){
+            return Math.cos( top1*Math.PI/180);
+        }
+        if (Operator.equals("tand")){
+            return Math.tan(top1*Math.PI/180);
+        }
+        if (Operator.equals("arctand")){
+            return (Math.atan(top1))*180/Math.PI;
+        }
+        if (Operator.equals("arcsin")){
+            return (Math.asin(top1))*180/Math.PI;
+        }
+        if (Operator.equals("arccos")){
+            return (Math.acos( top1))*180/Math.PI;
+        }
         if (Operator.equals("log")){
+            return Math.log10(top1);
+        }
+        if (Operator.equals("ln")){
             return Math.log(top1);
         }
 
@@ -299,13 +327,52 @@ public class RPNCalculator {
         }
         return output;
     }   
-   
+
+    public static int[] Fractionize (double in){
+        int i=10;
+        double[] z = new double[i];
+  //      double[] N = new double[i];
+        double[] D = new double[i];
+        z[1]=in;
+        D[0]=0;
+        D[1]=1;
+        for (i=2; i<10; i++){
+            z[i]=1/(z[i-1]- ((int) z[i-1]));
+            D[i]=D[i-1]*z[i]+D[i-2];
+//            N[i]=N[i-1]
+        }
+        
+        int[] ans = new int[2];
+        ans[0]=(int) D[9];
+        ans[1]=(int) Math.round(in*D[9]);
+        
+        //System.out.println(ans[1]);
+        //System.out.println(ans[0]);
+        //System.out.println((double) ans[1] / (double) ans[0]);
+        return ans;
+
+    }
+
+    public String[] Calculate_Fraction (String input)throws IOException{
+        double res= EvaluateRPN(ShuntingYard(AddSeperator(input)));
+        int[] ans= new int[2];
+        ans=Fractionize(res);
+        String[] result = new String[2];
+        result[0]=Integer.toString(ans[0]);
+        result[1]=Integer.toString(ans[1]);
+        return result;
+    }
+    
+    
     public String Calculate(String input) throws IOException{
-        //System.out.println((AddSeperator(input)));
-        //System.out.println("-----------------");
-        //System.out.println(ShuntingYard(AddSeperator(input)));
-        //System.out.println("-----------------");
-        return Double.toString(EvaluateRPN(ShuntingYard(AddSeperator(input))));
+        double res= EvaluateRPN(ShuntingYard(AddSeperator(input)));
+        if ((int) res == res){
+        	return Double.toString((int) res);
+        }
+        else{        	
+        	res = (double)Math.round(res * 100) / 100;
+        	return Double.toString((int) res);
+        }
     }
    
 }
