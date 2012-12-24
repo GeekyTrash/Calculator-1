@@ -1,7 +1,8 @@
-package in.manaspaldhe.helloworld;
+package com.manas.anurag.calculator;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class GridAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		return MainActivity.button_text.length;
+		return MainActivity.button_text_values.length;
 	}
 
 	@Override
@@ -43,22 +44,23 @@ public class GridAdapter extends BaseAdapter{
 		Button btn;        
 		if (convertView == null) {          
 			btn = new Button(ctx); 
-			final int pos = position;
-
-			btn.setOnClickListener(new View.OnClickListener() { 
-				public void onClick(View v) { 
-					a.performButtonClick(pos);
-				} 
-			}); 
 		} 
-		else 
-		{           
+		else{           
 			btn = (Button) convertView;       
 		}       
+		final int pos = position;
+
+		btn.setOnClickListener(new View.OnClickListener() { 
+			public void onClick(View v) { 
+				Log.d("clicked", Integer.toString(pos));
+				a.performButtonClick(pos);
+			} 
+		}); 
 		btn.setGravity(Gravity.CENTER);
 		btn.setText(MainActivity.button_text[position]);  
 		btn.setBackgroundResource(R.drawable.button);
 		btn.setTextColor(Color.LTGRAY);
+		btn.setLines(1);
 		return btn;    	
 	}
 }

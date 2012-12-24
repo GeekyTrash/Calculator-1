@@ -1,4 +1,4 @@
-package in.manaspaldhe.helloworld;
+package com.manas.anurag.calculator;
 
 import android.content.Context;
 import android.widget.GridView;
@@ -21,12 +21,21 @@ public class Actions {
 	}
 
 	public void performButtonClick(int pos) {
+		MainActivity.lastKeyPressed = pos;
 		if(pos==19){		// equals button pressed
-			RPNCalculator calc = new RPNCalculator();
+			RPNCalculator calc = new RPNCalculator(ctx);
 			String value="";
 			try {
 				value=calc.Calculate(MainActivity.exp);
-				tv.setText(MainActivity.exp + " = "+value);
+				String display_value;
+				if(MainActivity.dec2frac){
+					int[] f = RPNCalculator.Fractionize(Double.valueOf(value));
+					display_value = f[0]+"/"+f[1];
+				}
+				else{
+					display_value = value;
+				}
+				tv.setText(MainActivity.exp + " = "+display_value);
 				MainActivity.exp = value;
 			}
 			catch(Exception e){
@@ -39,7 +48,14 @@ public class Actions {
 			tv.setText("");
 		}
 		else if(pos==3){
-			MainActivity.exp = MainActivity.exp.substring(0,MainActivity.exp.length()-1);
+			if(MainActivity.exp.length()!=0){
+				MainActivity.exp = MainActivity.exp.substring(0,MainActivity.exp.length()-1);
+			}
+			tv.setText(MainActivity.exp);
+		}
+		else if((pos==24 || pos==25 || pos==26 || pos==28 || pos==29 || pos==30) && MainActivity.inDegrees){
+			MainActivity.exp += MainActivity.button_text_values[pos];
+			MainActivity.exp = MainActivity.exp.substring(0,MainActivity.exp.length()-1)+"d(";
          	tv.setText(MainActivity.exp);
 		}
 		else{
