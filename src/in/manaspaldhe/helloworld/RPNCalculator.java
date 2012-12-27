@@ -331,20 +331,26 @@ public class RPNCalculator {
     public static int[] Fractionize (double in){
         int i=10;
         double[] z = new double[i];
-  //      double[] N = new double[i];
+        double[] N = new double[i];
         double[] D = new double[i];
         z[1]=in;
         D[0]=0;
         D[1]=1;
         for (i=2; i<10; i++){
             z[i]=1/(z[i-1]- ((int) z[i-1]));
-            D[i]=D[i-1]*z[i]+D[i-2];
-//            N[i]=N[i-1]
+            D[i]=D[i-1]*((int)z[i])+D[i-2];
+            N[i]=(int) Math.round(in*D[i]);
+            if (Math.abs(in-N[i]/D[i])< 0.0001){
+                z[9]=z[i];
+                D[9]=D[i];
+                N[9]=N[i];
+                break;
+            }
         }
         
         int[] ans = new int[2];
-        ans[0]=(int) D[9];
-        ans[1]=(int) Math.round(in*D[9]);
+        ans[0]=(int) N[9];
+        ans[1]=(int) D[9];
         
         //System.out.println(ans[1]);
         //System.out.println(ans[0]);
@@ -366,7 +372,7 @@ public class RPNCalculator {
     
     public String Calculate(String input) throws IOException{
         double res= EvaluateRPN(ShuntingYard(AddSeperator(input)));
-        if ((int) res == res){
+        if (((int) res) == res){
         	return Double.toString((int) res);
         }
         else{        	
