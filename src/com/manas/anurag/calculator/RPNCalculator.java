@@ -1,6 +1,8 @@
-package in.manaspaldhe.helloworld;
+package com.manas.anurag.calculator;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.*;
+import java.text.*;
 /**
  *
  * @author mpaldhe
@@ -25,7 +27,7 @@ public class RPNCalculator {
                 }
             }
            
-            else if (ith_char=='.' || ith_char=='0' ||ith_char=='0' ||ith_char=='1' ||ith_char=='2' ||ith_char=='3' ||ith_char=='4' ||ith_char=='5' ||ith_char=='6' ||ith_char=='7' ||ith_char=='8' ||ith_char=='9');                   
+            else if (ith_char=='P' || ith_char=='I'  || ith_char=='e' ||  ith_char=='.' || ith_char=='0' ||ith_char=='0' ||ith_char=='1' ||ith_char=='2' ||ith_char=='3' ||ith_char=='4' ||ith_char=='5' ||ith_char=='6' ||ith_char=='7' ||ith_char=='8' ||ith_char=='9');                   
             else {
                 isOperator=true;
                 break;
@@ -40,6 +42,8 @@ public class RPNCalculator {
         if (given.equals("*")) return false;
         if (given.equals("/")) return false;
         if (given.equals("^")) return false;
+        if (given.equals("mod")) return false;
+        if (given.equals("!")) return false;
 
         else return true;
     }
@@ -50,16 +54,21 @@ public class RPNCalculator {
         if (op.equals("sin")){return 5;}
         if (op.equals("cos")){return 5;}
         if (op.equals("tan")){return 5;}
-        if (op.equals("arcsin")){return 5;}
-        if (op.equals("arccos")){return 5;}
-        if (op.equals("arctan")){return 5;}
+        if (op.equals("asin")){return 5;}
+        if (op.equals("acos")){return 5;}
+        if (op.equals("atan")){return 5;}
         if (op.equals("sind")){return 5;}
         if (op.equals("cosd")){return 5;}
         if (op.equals("tand")){return 5;}
-        if (op.equals("arcsind")){return 5;}
-        if (op.equals("arccosd")){return 5;}
-        if (op.equals("arctand")){return 5;}
+        if (op.equals("asind")){return 5;}
+        if (op.equals("acosd")){return 5;}
+        if (op.equals("atand")){return 5;}
+        if (op.equals("abs")){return 5;}
+        if (op.equals("sqrt")){return 5;}
+        if (op.equals("cbrt")){return 5;}
+        if (op.equals("mod")){return 4;}
         if (op.equals("^")){return 4;}
+        if (op.equals("!")){return 4;}
         if (op.equals("*")){return 3;}
         if (op.equals("/")){return 3;}
         if (op.equals("+")){return 2;}
@@ -82,8 +91,15 @@ public class RPNCalculator {
         return base;
         */
     }
+    public double factorial (double n){
+        double ans=1;
+        for (int i=1; i<=n; i++){
+            ans=ans*i;
+        }
+        return ans;
+    }
    
-    public  double Operate (double top1, double top2, String Operator){
+    public  double Operate (double top1, double top2, String Operator) throws IOException{
         if (Operator.equals("+")){
             return top1+top2;
         }
@@ -99,6 +115,17 @@ public class RPNCalculator {
         if (Operator.equals("^")){
             return Power(top2, top1);
         }
+        if (Operator.equals("!")){
+            if (((int) top1) != top1){
+                throw new IOException("Float in factorial");
+            }
+            else{
+                return factorial(top1);
+            }
+        }
+        if (Operator.equals("mod")){
+            return (top2%top1);
+        }
         if (Operator.equals("sin")){
             return Math.sin(top1);
         }
@@ -108,13 +135,13 @@ public class RPNCalculator {
         if (Operator.equals("tan")){
             return Math.tan(top1);
         }
-        if (Operator.equals("arctan")){
+        if (Operator.equals("atan")){
             return Math.atan(top1);
         }
-        if (Operator.equals("arcsin")){
+        if (Operator.equals("asin")){
             return Math.asin(top1);
         }
-        if (Operator.equals("arccos")){
+        if (Operator.equals("acos")){
             return Math.acos( top1);
         }
         if (Operator.equals("sind")){
@@ -126,20 +153,29 @@ public class RPNCalculator {
         if (Operator.equals("tand")){
             return Math.tan(top1*Math.PI/180);
         }
-        if (Operator.equals("arctand")){
+        if (Operator.equals("atand")){
             return (Math.atan(top1))*180/Math.PI;
         }
-        if (Operator.equals("arcsin")){
+        if (Operator.equals("asin")){
             return (Math.asin(top1))*180/Math.PI;
         }
-        if (Operator.equals("arccos")){
+        if (Operator.equals("acos")){
             return (Math.acos( top1))*180/Math.PI;
+        }
+        if (Operator.equals("abs")){
+            return Math.abs(top1);
         }
         if (Operator.equals("log")){
             return Math.log10(top1);
         }
         if (Operator.equals("ln")){
             return Math.log(top1);
+        }
+        if (Operator.equals("sqrt")){
+            return Math.sqrt(top1);
+        }
+        if (Operator.equals("cbrt")){
+            return Math.cbrt(top1);
         }
 
         else return 0;
@@ -227,8 +263,7 @@ public class RPNCalculator {
             expression[i]=input.substring(commas[i-1]+1, commas[i]);
         }
         expression[comma_counter]=input.substring(commas[comma_counter-1]+1);
-       
-       
+              
         // Testing the expression
         /*
         for (int i=0; i<=comma_counter; i++){
@@ -238,20 +273,43 @@ public class RPNCalculator {
         Stack Calc= new Stack();
        
         for (int i=0; i<=comma_counter; i++){
+            if (expression[i].equals("(")){
+                throw new IOException("Incorrect Brackets");
+            }
             if (checkOperator(expression[i])==false){// if the expression is not an operator
-                // Push it in stack
-                Calc.Push(expression[i]);
+            	if (expression[i].equals("PI")){
+                    Calc.Push(Double.toString(Math.PI));            		
+            	}
+            	else if (expression[i].equals("e")){
+                    Calc.Push(Double.toString(Math.E));            		
+            	}
+            	else{
+                	// Push it in stack
+                    Calc.Push(expression[i]);
+            	}
             }
             else if (isFunction(expression[i])==true){
-                double top1= Double.parseDouble(Calc.Pop().toString());
-                double result = Operate(top1, 0, expression[i]);
-                Calc.Push(result);
+            	if (expression[i].equalsIgnoreCase("pi")){
+            		Calc.Push(Math.PI);                    
+            	}
+            	else{
+                	double top1= Double.parseDouble(Calc.Pop().toString());
+                    double result = Operate(top1, 0, expression[i]);
+                    Calc.Push(result);
+            	}
             }
             else {
-                double top1= Double.parseDouble(Calc.Pop().toString());
-                double top2= Double.parseDouble(Calc.Pop().toString());
-                double result= Operate(top1, top2, expression[i] );
-                Calc.Push(result);
+                if (expression[i].equals("!")){
+                    double top1= Double.parseDouble(Calc.Pop().toString());
+                    double result= Operate(top1, 0, expression[i] );                    
+                    Calc.Push(result);                    
+                }
+                else{
+                    double top1= Double.parseDouble(Calc.Pop().toString());
+                    double top2= Double.parseDouble(Calc.Pop().toString());
+                    double result= Operate(top1, top2, expression[i] );
+                    Calc.Push(result);                    
+                }
                 //System.out.println(top1+ " " + top2 + " " + result +" "+expression[i]);
             }
         }
@@ -333,21 +391,26 @@ public class RPNCalculator {
         double[] z = new double[i];
         double[] N = new double[i];
         double[] D = new double[i];
-        z[1]=in;
-        D[0]=0;
-        D[1]=1;
-        for (i=2; i<10; i++){
-            z[i]=1/(z[i-1]- ((int) z[i-1]));
-            D[i]=D[i-1]*((int)z[i])+D[i-2];
-            N[i]=(int) Math.round(in*D[i]);
-            if (Math.abs(in-N[i]/D[i])< 0.0001){
-                z[9]=z[i];
-                D[9]=D[i];
-                N[9]=N[i];
-                break;
-            }
+        if (((int) in) == in){
+        	N[9]=in;
+        	D[9]=1;
         }
-        
+        else{
+	        z[1]=in;
+	        D[0]=0;
+	        D[1]=1;
+	        for (i=2; i<10; i++){
+	            z[i]=1/(z[i-1]- ((int) z[i-1]));
+	            D[i]=D[i-1]*((int)z[i])+D[i-2];
+	            N[i]=(int) Math.round(in*D[i]);
+	            if (Math.abs(in-N[i]/D[i])< 0.0001){
+	                z[9]=z[i];
+	                D[9]=D[i];
+	                N[9]=N[i];
+	                break;
+	            }
+	        }
+        }
         int[] ans = new int[2];
         ans[0]=(int) N[9];
         ans[1]=(int) D[9];
@@ -373,11 +436,14 @@ public class RPNCalculator {
     public String Calculate(String input) throws IOException{
         double res= EvaluateRPN(ShuntingYard(AddSeperator(input)));
         if (((int) res) == res){
-        	return Double.toString((int) res);
+        	return Integer.toString((int) res);
+        }
+        if (res<1000000){
+        	return Double.toString(res);
         }
         else{        	
-        	res = (double)Math.round(res * 100) / 100;
-        	return Double.toString((int) res);
+            DecimalFormat df = new DecimalFormat("0.###E0");
+        	return (df.format(res));
         }
     }
    

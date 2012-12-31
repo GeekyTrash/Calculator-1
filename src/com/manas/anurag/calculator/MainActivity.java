@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 	static boolean dec2frac = false;
 	static boolean inDegrees = false;
 	static int lastKeyPressed = 19;
+	static String Ans = "";
 	
 
 	public static String[] button_text = new String[]{
@@ -36,7 +37,7 @@ public class MainActivity extends Activity {
 		"^",		"ln(",		"log(",		"sqrt(",
 		"sin(",		"cos(",		"tan(",		"e",
 		"asin(",	"acos(",	"atan(",	"mod",		
-		"pi",		"x!",		"abs(",		"test" 	
+		"pi",		"x!",		"abs(",		"cbrt(" 	
 	};
 
 	public static String[] button_text_values = new String[]{
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
 		"^",		"ln(",		"log(",		"sqrt(",
 		"sin(",		"cos(",		"tan(",		"e",
 		"asin(",	"acos(",	"atan(",	"mod",		
-		"pi",		"!",		"abs(",		"test" 	
+		"PI",		"!",		"abs(",		"cbrt(" 	
 	};
 
 	@Override
@@ -118,7 +119,7 @@ public class MainActivity extends Activity {
 			if(dec2frac){
 				item.setIcon(R.drawable.frac);
 				if(lastKeyPressed == 19){
-					int[] f = RPNCalculator.Fractionize(Double.valueOf(exp));
+					int[] f = RPNCalculator.Fractionize(Float.valueOf(exp));
 					String display_value = f[0]+"/"+f[1];
 					textView.setText(exp + " = "+display_value);
 				}
@@ -126,6 +127,11 @@ public class MainActivity extends Activity {
 			else{
 				item.setIcon(R.drawable.dec);
 			}
+			return true;
+
+		case R.id.last_ans:		//FIXME - degree radian implementation
+			exp+=Ans;
+			a.tv.setText(MainActivity.exp);
 			return true;
 		
 		default:
