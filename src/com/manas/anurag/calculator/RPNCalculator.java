@@ -156,10 +156,10 @@ public class RPNCalculator {
         if (Operator.equals("atand")){
             return (Math.atan(top1))*180/Math.PI;
         }
-        if (Operator.equals("asin")){
+        if (Operator.equals("asind")){
             return (Math.asin(top1))*180/Math.PI;
         }
-        if (Operator.equals("acos")){
+        if (Operator.equals("acosd")){
             return (Math.acos( top1))*180/Math.PI;
         }
         if (Operator.equals("abs")){
@@ -439,7 +439,8 @@ public class RPNCalculator {
         	return Integer.toString((int) res);
         }
         if (res<1000000){
-        	return Double.toString(res);
+            DecimalFormat df = new DecimalFormat("0.###");
+        	return (df.format(res));
         }
         else{        	
             DecimalFormat df = new DecimalFormat("0.###E0");

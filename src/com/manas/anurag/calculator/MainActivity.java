@@ -108,9 +108,19 @@ public class MainActivity extends Activity {
 			inDegrees = !inDegrees;
 			if(inDegrees){
 				item.setIcon(R.drawable.deg);
+				// add "d" after all sin and cos terms
+				exp=exp.replace("sin", "sind");
+				exp=exp.replace("cos", "cosd");
+				exp=exp.replace("tan", "tand");
+				a.tv.setText(MainActivity.exp);
 			}
 			else{
 				item.setIcon(R.drawable.rad);
+				// remove "d" after all sind and cosd terms
+				exp=exp.replace("sind", "sin");
+				exp=exp.replace("cosd", "cos");
+				exp=exp.replace("tand", "tan");
+				a.tv.setText(MainActivity.exp);
 			}
 			return true;
 		
@@ -123,9 +133,10 @@ public class MainActivity extends Activity {
 					String display_value = f[0]+"/"+f[1];
 					textView.setText(exp + " = "+display_value);
 				}
+				// change all sin
 			}
 			else{
-				item.setIcon(R.drawable.dec);
+				item.setIcon(R.drawable.dec);				
 			}
 			return true;
 
