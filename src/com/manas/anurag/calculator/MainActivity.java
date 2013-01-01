@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 		"^",		"ln(",		"log(",		"sqrt(",
 		"sin(",		"cos(",		"tan(",		"e",
 		"asin(",	"acos(",	"atan(",	"mod",		
-		"pi",		"x!",		"abs(",		"cbrt(" 	
+		"\u03C0",		"x!",		"abs(",		"cbrt(" 	
 	};
 
 	public static String[] button_text_values = new String[]{
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 		"^",		"ln(",		"log(",		"sqrt(",
 		"sin(",		"cos(",		"tan(",		"e",
 		"asin(",	"acos(",	"atan(",	"mod",		
-		"PI",		"!",		"abs(",		"cbrt(" 	
+		"\u03C0",		"!",		"abs(",		"cbrt(" 	
 	};
 
 	@Override

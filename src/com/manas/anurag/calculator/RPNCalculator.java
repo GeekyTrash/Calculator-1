@@ -27,7 +27,7 @@ public class RPNCalculator {
                 }
             }
            
-            else if (ith_char=='P' || ith_char=='I'  || ith_char=='e' ||  ith_char=='.' || ith_char=='0' ||ith_char=='0' ||ith_char=='1' ||ith_char=='2' ||ith_char=='3' ||ith_char=='4' ||ith_char=='5' ||ith_char=='6' ||ith_char=='7' ||ith_char=='8' ||ith_char=='9');                   
+            else if (ith_char=='\u03C0' || ith_char=='P' || ith_char=='I'  || ith_char=='e' ||  ith_char=='.' || ith_char=='0' ||ith_char=='0' ||ith_char=='1' ||ith_char=='2' ||ith_char=='3' ||ith_char=='4' ||ith_char=='5' ||ith_char=='6' ||ith_char=='7' ||ith_char=='8' ||ith_char=='9');                   
             else {
                 isOperator=true;
                 break;
@@ -277,7 +277,7 @@ public class RPNCalculator {
                 throw new IOException("Incorrect Brackets");
             }
             if (checkOperator(expression[i])==false){// if the expression is not an operator
-            	if (expression[i].equals("PI")){
+            	if (expression[i].equals("\u03C0")){
                     Calc.Push(Double.toString(Math.PI));            		
             	}
             	else if (expression[i].equals("e")){
@@ -289,7 +289,7 @@ public class RPNCalculator {
             	}
             }
             else if (isFunction(expression[i])==true){
-            	if (expression[i].equalsIgnoreCase("pi")){
+            	if (expression[i].equalsIgnoreCase("\u03C0")){
             		Calc.Push(Math.PI);                    
             	}
             	else{
