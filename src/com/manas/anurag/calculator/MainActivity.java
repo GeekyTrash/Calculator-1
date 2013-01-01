@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	static String exp="";
-//	public final static String EXTRA_MESSAGE = "in.manaspaldhe.helloworld.MESSAGE";
 	Actions a;
 	TextView textView;
 	GridView gridView;
@@ -27,7 +26,7 @@ public class MainActivity extends Activity {
 	static boolean inDegrees = false;
 	static int lastKeyPressed = 19;
 	static String Ans = "";
-	
+
 
 	public static String[] button_text = new String[]{
 		"7",	"8",	"9",	"<-",
@@ -36,9 +35,9 @@ public class MainActivity extends Activity {
 		".",	"0",	"-",	"+",
 		"(",	")",	"CE",	"=",
 		"^",		"ln(",		"log(",		"\u221A(",
-		"sin(",		"cos(",		"tan(",		"e",
-		"asin(",	"acos(",	"atan(",	"mod",		
-		"\u03C0",		"x!",		"abs(",		"\u221B(" 	
+		"sin(",		"cos(",		"tan(",		"\u221B(",
+		"asin(",	"acos(",	"atan(",	"x!",		
+		"\u03C0",	"e",		"mod",		"abs(" 	
 	};
 
 	public static String[] button_text_values = new String[]{
@@ -48,23 +47,23 @@ public class MainActivity extends Activity {
 		".",	"0",	"-",	"+",
 		"(",	")",	"CE",	"=",
 		"^",		"ln(",		"log(",		"\u221A(",
-		"sin(",		"cos(",		"tan(",		"e",
-		"asin(",	"acos(",	"atan(",	"mod",		
-		"\u03C0",		"!",		"abs(",		"\u221B(" 	
+		"sin(",		"cos(",		"tan(",		"\u221B(",
+		"asin(",	"acos(",	"atan(",	"!",		
+		"\u03C0",	"e",		"mod",		"abs(" 	
 	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_main);
 		Typeface font= Typeface.createFromAsset(getAssets(), "fonts/DejaVuSerif.ttf");
-		
+
 		textView = (TextView) findViewById(R.id.content);
 		textView.setTypeface(font); 
 		textView.setMovementMethod(new ScrollingMovementMethod());
 		textView.setText("Expression here");
-		
+
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -125,8 +124,8 @@ public class MainActivity extends Activity {
 				a.tv.setText(MainActivity.exp);
 			}
 			return true;
-		
-		case R.id.dec2frac:		//FIXME - fraction decimal view implementation
+
+		case R.id.dec2frac:		// fraction decimal view implementation
 			dec2frac = !dec2frac;
 			if(dec2frac){
 				item.setIcon(R.drawable.frac);
@@ -135,7 +134,6 @@ public class MainActivity extends Activity {
 					String display_value = f[0]+"/"+f[1];
 					textView.setText(exp + " = "+display_value);
 				}
-				// change all sin
 			}
 			else{
 				item.setIcon(R.drawable.dec);				
@@ -146,10 +144,9 @@ public class MainActivity extends Activity {
 			exp = Ans;
 			a.tv.setText(MainActivity.exp);
 			return true;
-		
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
 }
