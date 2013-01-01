@@ -1,6 +1,7 @@
 package com.manas.anurag.calculator;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -19,9 +20,11 @@ public class Actions {
 		ctx = applicationContext;
 		tv = textView;
 		gv = gridView;
+
 	}
 
 	public void performButtonClick(int pos) {
+
 		MainActivity.lastKeyPressed = pos;
 		if(pos==19){		// equals button pressed
 			RPNCalculator calc = new RPNCalculator();

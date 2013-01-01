@@ -2,6 +2,7 @@ package com.manas.anurag.calculator;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
@@ -34,10 +35,10 @@ public class MainActivity extends Activity {
 		"1",	"2",	"3",	"x",
 		"0",	".",	"-",	"+",
 		"(",	")",	"CE",	"=",
-		"^",		"ln(",		"log(",		"sqrt(",
+		"^",		"ln(",		"log(",		"\u221A(",
 		"sin(",		"cos(",		"tan(",		"e",
 		"asin(",	"acos(",	"atan(",	"mod",		
-		"\u03C0",		"x!",		"abs(",		"cbrt(" 	
+		"\u03C0",		"x!",		"abs(",		"\u221B(" 	
 	};
 
 	public static String[] button_text_values = new String[]{
@@ -46,10 +47,10 @@ public class MainActivity extends Activity {
 		"1",	"2",	"3",	"*",
 		"0",	".",	"-",	"+",
 		"(",	")",	"CE",	"=",
-		"^",		"ln(",		"log(",		"sqrt(",
+		"^",		"ln(",		"log(",		"\u221A(",
 		"sin(",		"cos(",		"tan(",		"e",
 		"asin(",	"acos(",	"atan(",	"mod",		
-		"\u03C0",		"!",		"abs(",		"cbrt(" 	
+		"\u03C0",		"!",		"abs(",		"\u221B(" 	
 	};
 
 	@Override
@@ -61,7 +62,7 @@ public class MainActivity extends Activity {
 		textView = (TextView) findViewById(R.id.content);
 		textView.setMovementMethod(new ScrollingMovementMethod());
 		textView.setText("Expression here");
-
+		
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -71,7 +72,6 @@ public class MainActivity extends Activity {
 		gridView = (GridView) findViewById(R.id.grid);
 		a = new Actions(this.getApplicationContext(), textView, gridView);
 		gridView.setAdapter(new GridAdapter(this,a)); 
-
 	}
 
 	@Override

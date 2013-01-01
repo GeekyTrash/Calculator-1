@@ -64,8 +64,8 @@ public class RPNCalculator {
         if (op.equals("acosd")){return 5;}
         if (op.equals("atand")){return 5;}
         if (op.equals("abs")){return 5;}
-        if (op.equals("sqrt")){return 5;}
-        if (op.equals("cbrt")){return 5;}
+        if (op.equals("\u221A")){return 5;}
+        if (op.equals("\u221B")){return 5;}
         if (op.equals("mod")){return 4;}
         if (op.equals("^")){return 4;}
         if (op.equals("!")){return 4;}
@@ -171,10 +171,10 @@ public class RPNCalculator {
         if (Operator.equals("ln")){
             return Math.log(top1);
         }
-        if (Operator.equals("sqrt")){
+        if (Operator.equals("\u221A")){
             return Math.sqrt(top1);
         }
-        if (Operator.equals("cbrt")){
+        if (Operator.equals("\u221B")){
             return Math.cbrt(top1);
         }
 
