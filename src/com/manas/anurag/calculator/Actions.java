@@ -13,6 +13,7 @@ public class Actions {
 	Context ctx;
 	TextView tv;
 	GridView gv;
+
 	boolean first=true;
 
 	public Actions(Context applicationContext, TextView textView, GridView gridView) {
@@ -32,7 +33,7 @@ public class Actions {
 				value=calc.Calculate(MainActivity.exp);
 				String display_value;
 				if(MainActivity.dec2frac){
-					int[] f = RPNCalculator.Fractionize(Float.valueOf(value));
+					String[] f = calc.Calculate_Fraction(MainActivity.exp);
 					display_value = f[0]+"/"+f[1];
 				}
 				else{
@@ -40,7 +41,7 @@ public class Actions {
 				}
 				MainActivity.Ans=display_value;
 				tv.setText(MainActivity.exp + " = "+display_value);
-				MainActivity.exp = value;
+				//MainActivity.exp = value;
 				first=true;
 			}
 			catch(Exception e){

@@ -130,13 +130,34 @@ public class MainActivity extends Activity {
 			if(dec2frac){
 				item.setIcon(R.drawable.frac);
 				if(lastKeyPressed == 19 && exp.length()>0){
-					int[] f = RPNCalculator.Fractionize(Float.valueOf(exp));
-					String display_value = f[0]+"/"+f[1];
-					textView.setText(exp + " = "+display_value);
+					//int[] f = RPNCalculator.Fractionize(Float.valueOf(exp));
+					RPNCalculator calc = new RPNCalculator();
+					try {
+						String[] f = calc.Calculate_Fraction(exp);
+						String display_value = f[0]+"/"+f[1];
+						textView.setText(exp + " = "+display_value);
+					}
+					catch(Exception e){
+						a.tv.setText(e.getMessage() + "  <-- to correct");
+						MainActivity.exp+=" ";				
+					}					
 				}
 			}
 			else{
 				item.setIcon(R.drawable.dec);				
+				if(lastKeyPressed == 19 && exp.length()>0){
+					//int[] f = RPNCalculator.Fractionize(Float.valueOf(exp));
+					RPNCalculator calc = new RPNCalculator();
+					try {
+						String f = calc.Calculate(exp);
+						//String display_value = f[0]+"/"+f[1];
+						textView.setText(exp + " = "+f);
+					}
+					catch(Exception e){
+						a.tv.setText(e.getMessage() + "  <-- to correct");
+						MainActivity.exp+=" ";				
+					}					
+				}
 			}
 			return true;
 
