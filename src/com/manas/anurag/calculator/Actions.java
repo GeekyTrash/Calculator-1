@@ -1,7 +1,6 @@
 package com.manas.anurag.calculator;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ public class Actions {
 	TextView tv;
 	GridView gv;
 	boolean first=true;
-	
+
 	public Actions(Context applicationContext, TextView textView, GridView gridView) {
 		ctx = applicationContext;
 		tv = textView;
@@ -64,7 +63,7 @@ public class Actions {
 		else if((pos==24 || pos==25 || pos==26 || pos==28 || pos==29 || pos==30) && MainActivity.inDegrees){
 			MainActivity.exp += MainActivity.button_text_values[pos];
 			MainActivity.exp = MainActivity.exp.substring(0,MainActivity.exp.length()-1)+"d(";
-         	tv.setText(MainActivity.exp);
+			tv.setText(MainActivity.exp);
 			first=false;
 		}
 		else{
@@ -78,6 +77,4 @@ public class Actions {
 			first=false;
 		}
 	}
-
-
 }

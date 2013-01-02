@@ -59,9 +59,12 @@ public class GridAdapter extends BaseAdapter{
 		}); 
 		btn.setGravity(Gravity.CENTER);
 		btn.setText(MainActivity.button_text[position]);  
-		btn.setBackgroundResource(R.drawable.button);
+		btn.setBackgroundResource(R.drawable.button1);
 		btn.setTextColor(Color.LTGRAY);
 		btn.setLines(1);
+		Typeface font= Typeface.createFromAsset(ctx.getAssets(), "fonts/DejaVuSerif.ttf");
+		btn.setTypeface(font); 
+
 		return btn;    	
 	}
 }
