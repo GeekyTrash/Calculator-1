@@ -41,7 +41,8 @@ public class Actions {
 				}
 				MainActivity.Ans=display_value;
 				tv.setText(MainActivity.exp + " = "+display_value);
-				//MainActivity.exp = value;
+				MainActivity.tempexp = MainActivity.exp;
+				MainActivity.exp = value;
 				first=true;
 			}
 			catch(Exception e){

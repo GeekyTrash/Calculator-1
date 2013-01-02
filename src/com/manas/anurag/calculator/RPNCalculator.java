@@ -27,7 +27,7 @@ public class RPNCalculator {
                 }
             }
            
-            else if (ith_char=='P' || ith_char=='I'  || ith_char=='e' ||  ith_char=='.' || ith_char=='0' ||ith_char=='0' ||ith_char=='1' ||ith_char=='2' ||ith_char=='3' ||ith_char=='4' ||ith_char=='5' ||ith_char=='6' ||ith_char=='7' ||ith_char=='8' ||ith_char=='9');                   
+            else if (ith_char=='\u03C0' || ith_char=='P' || ith_char=='I'  || ith_char=='e' ||  ith_char=='.' || ith_char=='0' ||ith_char=='0' ||ith_char=='1' ||ith_char=='2' ||ith_char=='3' ||ith_char=='4' ||ith_char=='5' ||ith_char=='6' ||ith_char=='7' ||ith_char=='8' ||ith_char=='9');                   
             else {
                 isOperator=true;
                 break;
@@ -202,12 +202,9 @@ public class RPNCalculator {
             else if (current.equals(")")){
                 output+=";"+current;
             }
-            else if (((checkOperator(current)==true)&&(isFunction(current)==true)) && (checkOperator(input.substring(i-1,i))==false)){
-                if (i==0);
-                else{
+            else if (((checkOperator(current)==true)&&(isFunction(current)==true))  && (i>0) && (checkOperator(input.substring(i-1,i))==false)){
                     output+=";*;"+current;
                     last_operator=i;                   
-                }
             }
             else if (current.equals("^")){
                     output+=";"+current;

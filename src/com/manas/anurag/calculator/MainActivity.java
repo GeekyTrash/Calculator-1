@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	static String exp="";
+	static String tempexp="";
 	Actions a;
 	TextView textView;
 	GridView gridView;
@@ -133,9 +134,10 @@ public class MainActivity extends Activity {
 					//int[] f = RPNCalculator.Fractionize(Float.valueOf(exp));
 					RPNCalculator calc = new RPNCalculator();
 					try {
-						String[] f = calc.Calculate_Fraction(exp);
+						String[] f = calc.Calculate_Fraction(tempexp);
 						String display_value = f[0]+"/"+f[1];
-						textView.setText(exp + " = "+display_value);
+						textView.setText(tempexp + " = "+display_value);
+						MainActivity.exp = display_value;
 					}
 					catch(Exception e){
 						a.tv.setText(e.getMessage() + "  <-- to correct");
@@ -149,9 +151,10 @@ public class MainActivity extends Activity {
 					//int[] f = RPNCalculator.Fractionize(Float.valueOf(exp));
 					RPNCalculator calc = new RPNCalculator();
 					try {
-						String f = calc.Calculate(exp);
-						//String display_value = f[0]+"/"+f[1];
-						textView.setText(exp + " = "+f);
+						String f = calc.Calculate(tempexp);
+						String display_value = f;
+						textView.setText(tempexp + " = "+f);
+						MainActivity.exp = display_value;
 					}
 					catch(Exception e){
 						a.tv.setText(e.getMessage() + "  <-- to correct");
