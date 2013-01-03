@@ -43,6 +43,7 @@ public class RPNCalculator {
         if (given.equals("/")) return false;
         if (given.equals("^")) return false;
         if (given.equals("mod")) return false;
+        if (given.equals("m")) return false; //mod
         if (given.equals("!")) return false;
 
         else return true;
@@ -64,8 +65,8 @@ public class RPNCalculator {
         if (op.equals("acosd")){return 5;}
         if (op.equals("atand")){return 5;}
         if (op.equals("abs")){return 5;}
-        if (op.equals("sqrt")){return 5;}
-        if (op.equals("cbrt")){return 5;}
+        if (op.equals("\u221A")){return 5;}
+        if (op.equals("\u221B")){return 5;}
         if (op.equals("mod")){return 4;}
         if (op.equals("^")){return 4;}
         if (op.equals("!")){return 4;}
@@ -171,10 +172,10 @@ public class RPNCalculator {
         if (Operator.equals("ln")){
             return Math.log(top1);
         }
-        if (Operator.equals("sqrt")){
+        if (Operator.equals("\u221A")){
             return Math.sqrt(top1);
         }
-        if (Operator.equals("cbrt")){
+        if (Operator.equals("\u221B")){
             return Math.cbrt(top1);
         }
 
@@ -204,6 +205,14 @@ public class RPNCalculator {
             }
             else if (((checkOperator(current)==true)&&(isFunction(current)==true))  && (i>0) && (checkOperator(input.substring(i-1,i))==false)){
                     output+=";*;"+current;
+                    last_operator=i;                   
+            }
+            else if ((i>=1)&&(input.charAt(i-1)=='m')&&(current.equals("o"))){
+                    output+=current;
+                    last_operator=i;                   
+            }
+            else if ((i>=2)&&(current.equals("d"))&&(input.charAt(i-1)=='o')&&(input.charAt(i-2)=='m')){
+                    output+=current;
                     last_operator=i;                   
             }
             else if (current.equals("^")){
@@ -421,7 +430,10 @@ public class RPNCalculator {
         int[] ans = new int[2];
         ans[0]=(int) N[9];
         ans[1]=(int) D[9];
-        
+        if ((ans[0]>0) && (ans[1]<0)){
+        	ans[0]=-ans[0];
+        	ans[1]=-ans[1];
+        }
         //System.out.println(ans[1]);
         //System.out.println(ans[0]);
         //System.out.println((double) ans[1] / (double) ans[0]);
