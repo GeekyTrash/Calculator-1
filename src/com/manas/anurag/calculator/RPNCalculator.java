@@ -17,7 +17,11 @@ public class RPNCalculator {
     public  boolean checkOperator (String given){
         int length=given.length();
         boolean isOperator=false;
-       
+
+        if (given.equals("ANS")){
+        	return false;
+        }
+
         for (int i=0; i<length; i++){
             char ith_char=given.charAt(i);
             if (ith_char==' ');
@@ -203,6 +207,15 @@ public class RPNCalculator {
             else if (current.equals(")")){
                 output+=";"+current;
             }
+            else if (current.equals("A")){
+            	output=output+";"+current;
+            }            
+            else if ((current.equals("N")) && (i>0) && (input.charAt(i-1)=='A')){
+            	output=output+current;
+            }            
+            else if ((current.equals("S")) && (i>1) && (input.charAt(i-2)=='A') && (input.charAt(i-1)=='N')){
+            	output=output+current;
+            }            
             else if (((checkOperator(current)==true)&&(isFunction(current)==true))  && (i>0) && (checkOperator(input.substring(i-1,i))==false)){
                     output+=";*;"+current;
                     last_operator=i;                   
@@ -292,7 +305,10 @@ public class RPNCalculator {
             if (expression[i].equals("(")){
                 throw new IOException("Incorrect Brackets");
             }
-            if (checkOperator(expression[i])==false){// if the expression is not an operator
+            if (expression[i].equals("ANS")){
+                    Calc.Push(MainActivity.Ans);            		            
+            }
+            else if (checkOperator(expression[i])==false){// if the expression is not an operator
             	if (expression[i].equals("\u03C0")){
                     Calc.Push(Double.toString(Math.PI));            		
             	}
@@ -308,8 +324,8 @@ public class RPNCalculator {
             	if (expression[i].equalsIgnoreCase("\u03C0")){
             		Calc.Push(Math.PI);                    
             	}
-            	else{
-                	double top1= Double.parseDouble(Calc.Pop().toString());
+            	else{                
+                    double top1= Double.parseDouble(Calc.Pop().toString());
                     double result = Operate(top1, 0, expression[i]);
                     Calc.Push(result);
             	}

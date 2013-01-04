@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 	static boolean dec2frac = false;
 	static boolean inDegrees = false;
 	static int lastKeyPressed = 19;
-	static String Ans = "";
+	static String Ans = "0";
 
 
 	public static String[] button_text = new String[]{
@@ -165,7 +165,7 @@ public class MainActivity extends Activity {
 			return true;
 
 		case R.id.last_ans:		
-			exp = exp+Ans;
+			exp = exp+"ANS";
 			a.tv.setText(MainActivity.exp);
 			return true;
 
