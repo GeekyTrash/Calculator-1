@@ -165,7 +165,7 @@ public class MainActivity extends Activity {
 			return true;
 
 		case R.id.last_ans:		
-			exp = Ans;
+			exp = exp+Ans;
 			a.tv.setText(MainActivity.exp);
 			return true;
 
