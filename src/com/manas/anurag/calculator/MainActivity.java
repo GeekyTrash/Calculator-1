@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 		"1",	"2",	"3",	"x",
 		".",	"0",	"-",	"+",
 		"(",	")",	"CE",	"=",
-		"^",		"ln(",		"log(",		"\u221A(",
+		"ln(",		"log(",		"^",		"\u221A(",
 		"sin(",		"cos(",		"tan(",		"\u221B(",
 		"asin(",	"acos(",	"atan(",	"x!",		
 		"\u03C0",	"e",		"mod",		"abs(" 	
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		"1",	"2",	"3",	"*",
 		".",	"0",	"-",	"+",
 		"(",	")",	"CE",	"=",
-		"^",		"ln(",		"log(",		"\u221A(",
+		"ln(",		"log(",		"^",		"\u221A(",
 		"sin(",		"cos(",		"tan(",		"\u221B(",
 		"asin(",	"acos(",	"atan(",	"!",		
 		"\u03C0",	"e",		"mod",		"abs(" 	
